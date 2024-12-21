@@ -15,7 +15,6 @@ export const AppRouter = () => {
     <>
       <Routes>
         {
-
           (authStatus === 'unauthorized') //authorized
             //ruta condicional
             ? <Route path='/auth/*' element={<LoginPage />} />
