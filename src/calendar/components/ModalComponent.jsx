@@ -30,7 +30,6 @@ export const ModalComponent = () => {
 
     const {
         isDateModalOpen,
-        openModal,
         closeModal
     } = useUiStore();
     const {
@@ -41,10 +40,10 @@ export const ModalComponent = () => {
         onDateChange,
         onSubmit,
     } = useModalForm();
+   
 
     return (
         <>
-            <button onClick={openModal}>Abrir Modal</button>
             <Modal
                 isOpen={isDateModalOpen}
                 onRequestClose={closeModal}

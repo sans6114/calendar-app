@@ -4,6 +4,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 //como se ve cada objeto de la lista de eventos:
 const tempEvent = {
+    _id: new Date().getTime(),
     title: 'cumpleaños del jefe',
     notes: 'Hay que comprar la torta',
     start: new Date(),
@@ -26,6 +27,9 @@ export const calendarSlice = createSlice({
         },
     },
     reducers: {
+        onSetActiveEvent(state, {payload: id}) {
+        state.activeEvent = state.events.find(event => event._id === id )
+        },
         addToCalendar(state, action) {
             //TODO: ADD TO CALENDAR
         },
@@ -38,4 +42,4 @@ export const calendarSlice = createSlice({
     }
 })
 
-export const { addToCalendar, deleteOfCalendar, editToCalendar } = calendarSlice.actions;
+export const { addToCalendar, deleteOfCalendar, editToCalendar, onSetActiveEvent } = calendarSlice.actions;

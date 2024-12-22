@@ -1,22 +1,41 @@
 import {
+  useEffect,
   useMemo,
   useRef,
   useState,
 } from 'react';
 
-import { differenceInSeconds } from 'date-fns';
+import {
+  addHours,
+  differenceInSeconds,
+} from 'date-fns';
 import Swal from 'sweetalert2';
 
 import { useCalendarStore } from './useCalendarStore';
 
+//si no tengo una nota activa
+const initialForm = {
+    title: '',
+    notes: '',
+    start: new Date(),
+    end: addHours(new Date(), 2),
+    bgColor: '#fafafa',
+    user: {
+        _id: '123',
+        name: 'Santiago'
+    }
+};
 export const useModalForm = () => {
     const {
-        eventos
+        activeEvent
     } = useCalendarStore()
-    console.log(eventos[0])
     const [formSubmitted, setFormSubmitted] = useState(false);
-    const [formValues, setFormValues] = useState(eventos[0]);
-    
+    const [formValues, setFormValues] = useState(initialForm);
+    useEffect(() => {
+        if (activeEvent !== null) {
+            setFormValues({ ...activeEvent });
+        }
+    }, [activeEvent]);
 
     const titleRef = useRef(null);
 
@@ -63,7 +82,6 @@ export const useModalForm = () => {
             });
             return;
         }
-        console.log(formValues);
     };
 
     return {

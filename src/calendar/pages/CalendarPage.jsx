@@ -19,14 +19,15 @@ import {
 } from '../../hooks';
 
 export const CalendarPage = () => {
-  const {
+    const {
     openModal
-  } = useUiStore();
-  const {
-    eventos
-  } = useCalendarStore()
-  console.log(eventos)
-  const [view, setView] = useState(localStorage.getItem('view') || 'day')
+    } = useUiStore();
+    const {
+    eventos,
+    setActiveDate
+    } = useCalendarStore()
+
+    const [view, setView] = useState(localStorage.getItem('view') || 'day')
 
   const eventStyleGetter = (event, start, end, isSelected) => {
     const style = {
@@ -46,12 +47,11 @@ export const CalendarPage = () => {
   }
   //evento de click
   const onEventClick = (event) => {
-    console.log('click solo' + event)
-
+    setActiveDate(event._id)
   }
   //evento cambio de vista
   const onEventChangeView = (event) => {
-    localStorage.setItem('view', event)
+    localStorage.setItem('view', { event })
     setView(view)
   }
 
