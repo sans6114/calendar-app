@@ -2,7 +2,6 @@ import 'react-big-calendar/lib/css/react-big-calendar.css';
 
 import { useState } from 'react';
 
-import { addHours } from 'date-fns';
 import { Calendar } from 'react-big-calendar';
 
 import {
@@ -14,22 +13,19 @@ import {
   getMessagesES,
   localizer,
 } from '../../helpers';
-
-const eventos = [{
-  title: 'cumpleaños del jefe',
-  notes: 'Hay que comprar la torta',
-  start: new Date(),
-  end: addHours(new Date(), 2),
-  bgColor: '#fafafa',
-  user: {
-    id: '123',
-    name: 'santiago'
-  },
-},
-]
-
+import {
+  useCalendarStore,
+  useUiStore,
+} from '../../hooks';
 
 export const CalendarPage = () => {
+  const {
+    openModal
+  } = useUiStore();
+  const {
+    eventos
+  } = useCalendarStore()
+  console.log(eventos)
   const [view, setView] = useState(localStorage.getItem('view') || 'day')
 
   const eventStyleGetter = (event, start, end, isSelected) => {
@@ -46,6 +42,7 @@ export const CalendarPage = () => {
   //evento de doble click
   const onEventDoubleClick = (event) => {
     console.log('click doble' + event)
+    openModal()
   }
   //evento de click
   const onEventClick = (event) => {
@@ -73,13 +70,13 @@ export const CalendarPage = () => {
         messages={getMessagesES()}
         eventPropGetter={eventStyleGetter}
         components={{
-          event: CalendarEventBox
+          event: CalendarEventBox,
         }}
         onDoubleClickEvent={onEventDoubleClick}
         onSelectEvent={onEventClick}
         onView={onEventChangeView}
-        />
-        <ModalComponent/>
+      />
+      <ModalComponent />
     </>
   )
 }
