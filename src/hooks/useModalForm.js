@@ -33,7 +33,7 @@ export const useModalForm = () => {
     const [formValues, setFormValues] = useState(initialForm);
     useEffect(() => {
         if (activeEvent !== null) {
-            setFormValues({ ...activeEvent });
+            setFormValues({ ...initialForm,...activeEvent });
         }
     }, [activeEvent]);
 

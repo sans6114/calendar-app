@@ -10,8 +10,8 @@ export const useCalendarStore = () => {
     const dispatch = useDispatch();
 
 
-    const setActiveDate = (id) => {
-        dispatch(onSetActiveEvent(id))
+    const setActiveDate = (calendarDate) => {
+        dispatch(onSetActiveEvent(calendarDate))
     }
 
 

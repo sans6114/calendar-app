@@ -6,6 +6,7 @@ import { Calendar } from 'react-big-calendar';
 
 import {
   CalendarEventBox,
+  FabAddNew,
   ModalComponent,
   NavBar,
 } from '../';
@@ -47,7 +48,7 @@ export const CalendarPage = () => {
   }
   //evento de click
   const onEventClick = (event) => {
-    setActiveDate(event._id)
+    setActiveDate(event)
   }
   //evento cambio de vista
   const onEventChangeView = (event) => {
@@ -77,6 +78,7 @@ export const CalendarPage = () => {
         onView={onEventChangeView}
       />
       <ModalComponent />
+      <FabAddNew/>
     </>
   )
 }
