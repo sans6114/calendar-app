@@ -27,8 +27,8 @@ export const calendarSlice = createSlice({
         },
     },
     reducers: {
-        onSetActiveEvent(state, {payload: calendar}) {
-        state.activeEvent = state.calendar
+        onSetActiveEvent(state, {payload}) {
+        state.activeEvent = payload
         },
         addToCalendar(state, action) {
             //TODO: ADD TO CALENDAR

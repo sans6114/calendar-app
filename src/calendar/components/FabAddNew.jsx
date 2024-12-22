@@ -1,5 +1,7 @@
 import '../styles/fabButton.css';
 
+import { addHours } from 'date-fns';
+
 import {
   useCalendarStore,
   useUiStore,
@@ -15,7 +17,17 @@ const {
 
 
 const onNewNote = () =>{
-    setActiveDate()
+    setActiveDate({
+         title: '',
+            notes: '',
+            start: new Date(),
+            end: addHours(new Date(), 2),
+            bgColor: '#fafafa',
+            user: {
+                _id: '123',
+                name: 'Santiago'
+            }
+    })
 }
 
     return (
