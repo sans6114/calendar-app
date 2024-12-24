@@ -40,7 +40,6 @@ export const ModalComponent = () => {
         onDateChange,
         onSubmit,
     } = useModalForm();
-   
 
     return (
         <>

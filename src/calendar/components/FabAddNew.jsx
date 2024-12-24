@@ -16,9 +16,9 @@ const {
 } = useCalendarStore()
 
 
-const onNewNote = () =>{
+const handleClickFab = () =>{
     setActiveDate({
-         title: '',
+            title: '',
             notes: '',
             start: new Date(),
             end: addHours(new Date(), 2),
@@ -28,10 +28,11 @@ const onNewNote = () =>{
                 name: 'Santiago'
             }
     })
+    openModal()
 }
 
     return (
-        <button onClick={openModal} className='btn btn-primary fab'>
+        <button onClick={handleClickFab} className='btn btn-primary fab'>
             <i className='fas fa-plus'></i>
         </button>
     )

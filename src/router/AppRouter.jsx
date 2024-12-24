@@ -9,7 +9,7 @@ import { CalendarPage } from '../calendar';
 
 export const AppRouter = () => {
 
-  const authStatus = 'unauthorize'
+  const authStatus = 'authorized'
 
   return (
     <>

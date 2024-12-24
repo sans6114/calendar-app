@@ -12,6 +12,7 @@ import {
 import Swal from 'sweetalert2';
 
 import { useCalendarStore } from './useCalendarStore';
+import { useUiStore } from './useUiStore';
 
 //si no tengo una nota activa
 const initialForm = {
@@ -27,10 +28,15 @@ const initialForm = {
 };
 export const useModalForm = () => {
     const {
-        activeEvent
+        activeEvent,
+        startNewDate
     } = useCalendarStore()
+    const {
+        closeModal
+    } = useUiStore()
     const [formSubmitted, setFormSubmitted] = useState(false);
     const [formValues, setFormValues] = useState(initialForm);
+    //tengo un evento activo
     useEffect(() => {
         if (activeEvent !== null) {
             setFormValues({ ...activeEvent });
@@ -66,6 +72,7 @@ export const useModalForm = () => {
         event.preventDefault();
         setFormSubmitted(true);
         const difference = differenceInSeconds(formValues.end, formValues.start);
+        //verifico si hay diferencia entre mi fecha de inicio y final
         if (difference <= 0) {
             Swal.fire({
                 title: 'Error!',
@@ -74,6 +81,7 @@ export const useModalForm = () => {
             });
             return;
         }
+        //verifico si tengo titulo
         if (formValues.title.trim().length <= 0) {
             Swal.fire({
                 title: 'Error!',
@@ -82,6 +90,10 @@ export const useModalForm = () => {
             });
             return;
         }
+        //envio mi formulario al store
+        startNewDate(formValues)
+        closeModal()
+        setFormSubmitted(false)
     };
 
     return {

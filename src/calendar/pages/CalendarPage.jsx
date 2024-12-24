@@ -18,6 +18,7 @@ import {
   useCalendarStore,
   useUiStore,
 } from '../../hooks';
+import { FabDelete } from '../components/fabDelete';
 
 export const CalendarPage = () => {
     const {
@@ -25,6 +26,7 @@ export const CalendarPage = () => {
     } = useUiStore();
     const {
     eventos,
+    activeEvent,
     setActiveDate
     } = useCalendarStore()
 
@@ -79,6 +81,7 @@ export const CalendarPage = () => {
       />
       <ModalComponent />
       <FabAddNew/>
+      {activeEvent && <FabDelete/>}
     </>
   )
 }

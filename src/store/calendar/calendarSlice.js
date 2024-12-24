@@ -31,14 +31,20 @@ export const calendarSlice = createSlice({
         state.activeEvent = payload
         },
         addToCalendar(state, action) {
-            //TODO: ADD TO CALENDAR
-        },
-        deleteOfCalendar(state, action) {
-            //TODO: ELIMINATE TO CALENDAR
+            state.events.push(action.payload)
         },
         editToCalendar(state, action) {
             //TODO: EDIT FROM CALENDAR
-        }
+            const itemToEdit = state.events.findIndex(event => event._id === action.payload._id)
+            state.events[itemToEdit] = action.payload
+            state.activeEvent = null
+        },
+        deleteOfCalendar(state) {
+            if(state.activeEvent){
+                state.events = state.events.filter(event => event._id !== state.activeEvent._id)
+                state.activeEvent = null
+            }
+        },
     }
 })
 
